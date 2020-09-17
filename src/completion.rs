@@ -1,24 +1,28 @@
-use std::fs;
-use std::path::Path;
-
 extern crate regex;
 use regex::{Regex};
+use path_objects;
 
-pub fn get_complete(_path: String) -> Vec<String> {
-    let re = Regex::new(r"(^.*)(/|)").unwrap();
-    let target_dir = match re.find(&_path) {
-        Some(dir) => if Path::new(&dir.as_str().to_string()).exists() 
-        {
-            dir.as_str()
-        }else{
-            "./"
-        },
+pub fn get_complete(_path: String) -> Option<Vec<String>> {
+    // ディレクトリ部の取得
+    let re = Regex::new(r"^.+/").unwrap();
+    let _target_dir = match re.find(&_path) {
+        Some(dir) => dir.as_str(),
         None => "./"
-    };
-    let paths = fs::read_dir(target_dir.to_string()).unwrap();
-    let mut complete: Vec<String> = Vec::new();
-    for path in paths {
-        println!("{}", path.unwrap().path().display())
+    }.to_string();
+    // 入力中のオブジェクトの取得
+    let re = Regex::new(r"[^/]*$").unwrap();
+    let _target_obj =  match re.find(&_path) {
+        Some(dir) => dir.as_str(),
+        None => ""
+    }.to_string();
+
+    match path_objects::new(_target_dir, _target_obj) {
+        Some(_list) => {
+            let _comletion_list:Vec<String> = _list.iter().map(
+                |_entry| _entry.get_name().to_string()
+            ).collect();
+            Some(_comletion_list)
+        },
+        _ => None,
     }
-    complete
 }

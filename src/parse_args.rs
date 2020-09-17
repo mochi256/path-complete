@@ -18,7 +18,6 @@ pub fn get_args() -> Args {
     .about(crate_description!())
     .arg(Arg::with_name("path")
         .help("complete file/dir path.")
-        .required(true)
     );
 
     let matches = app.get_matches();
