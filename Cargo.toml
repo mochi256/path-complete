@@ -1,0 +1,9 @@
+[package]
+name = "path-complete"
+version = "0.1.0"
+authors = ["mochi256 <mochi256@outlook.com>"]
+description = "Complete Files and Directories"
+
+[dependencies]
+clap = "2.33.3"
+regex = "1"
