@@ -62,11 +62,6 @@ pub fn new(_target_dir: String, _target_name: String) -> Option<Vec<PathObject>>
             if _vec.len() < 1 {
                 return None;
             }
-            if _vec.len() == 1 && !_vec[0].is_file() {
-                let mut _clone = _vec[0].clone();
-                _clone._name = format!("{}-", _vec[0].get_name()).to_string();
-                _vec.push(_clone);
-            }
             Some(_vec)
         },
         _ => None,
