@@ -1,7 +1,7 @@
 [package]
 name = "path-complete"
 version = "0.1.0"
-authors = ["mochi256 <mochi256@outlook.com>"]
+authors = ["mochi256 <contact@mochi256.com>"]
 description = "Complete Files and Directories"
 
 [dependencies]
